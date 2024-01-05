@@ -54,6 +54,7 @@ include('conn.php');
                     <tr>
                     <td>$row[id]</td>
                     <td>$row[item_code] </td>
+                    <td>$row[item_name]</td>
                     <td>$row[item_category]</td>
                     <td>$row[item_subcategory]</td>
                     <td>$row[item_name]</td>
