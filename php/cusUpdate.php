@@ -1,11 +1,15 @@
 <?php
-include('conn.php');
+include('conn.php'); // Include database connection
 
+// Get customer ID from the URL
 $id = $_GET['updateid'];
+
+// Fetch customer data based on ID
 $sql = "SELECT * FROM customer WHERE id = '$id'";
 $result = mysqli_query($conn, $sql);
 $row = mysqli_fetch_assoc($result);
 
+// Extract customer details for pre-filling the form
 $title = $row['title'];
 $firstname = $row['first_name'];
 $middlename = $row['middle_name'];
@@ -13,10 +17,12 @@ $lastname = $row['last_name'];
 $contactno = $row['contact_no'];
 $selecteddistrict = $row['district'];
 
+// Fetch list of districts for dropdown
 $sql = "SELECT district FROM district";
 $result_districts = mysqli_query($conn, $sql);
 $district_list = array();
 
+// Populate the district_list array with district names
 if ($result_districts) {
     while ($row_districts = mysqli_fetch_assoc($result_districts)) {
         $district_list[] = $row_districts['district'];
@@ -25,8 +31,9 @@ if ($result_districts) {
     echo "Error: " . $sql . "<br>" . mysqli_error($conn);
 }
 
-
+// Handle form submission
 if (isset($_POST['submit'])) {
+    // Retrieve form data
     $title = $_POST['title'];
     $firstname = $_POST['firstname'];
     $middlename = $_POST['middlename'];
@@ -34,16 +41,19 @@ if (isset($_POST['submit'])) {
     $contactno = $_POST['contactno'];
     $district = $_POST['district'];
 
+    // Update customer data in the database
     $sql = "UPDATE customer SET title='$title', first_name='$firstname', middle_name='$middlename', last_name='$lastname', contact_no='$contactno', district='$district' WHERE id='$id'";
 
+    // Execute the SQL query
     if (mysqli_query($conn, $sql)) {
-        header("Location: cusViewList.php");
+        header("Location: cusViewList.php"); // Redirect on successful update
         exit();
     } else {
-        echo "Error: " . $sql . "<br>" . mysqli_error($conn);
+        echo "Error: " . $sql . "<br>" . mysqli_error($conn); // Display error message
     }
 }
 ?>
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -91,6 +101,9 @@ if (isset($_POST['submit'])) {
 </head>
 
 <body>
+    <!-- Navbar -->
+    <?php include("navbar.php") ?>
+    <!-- Update Customer Information -->
     <div class="container my-5">
         <h2 class="text-center mb-3"> Update Customer Information </h2>
         <div class="fluid-container">
@@ -159,11 +172,10 @@ if (isset($_POST['submit'])) {
                     </div>
             </form>
         </div>
-
-
     </div>
 
     <script>
+        // Form validation
         function validateForm() {
             var title = document.getElementById('title').value;
             var firstname = document.getElementById('firstname').value;
@@ -192,5 +204,7 @@ if (isset($_POST['submit'])) {
     </script>
 
 </body>
+<!-- Footer -->
+<?php include("footer.php") ?>
 
 </html>

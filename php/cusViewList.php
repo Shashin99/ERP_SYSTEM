@@ -1,5 +1,5 @@
 <?php
-include('conn.php');
+include('conn.php'); // Include database connection
 ?>
 
 <!DOCTYPE html>
@@ -15,12 +15,12 @@ include('conn.php');
 
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-
 </head>
 
 <body>
+    <!-- Navbar -->
     <?php include("navbar.php") ?>
-
+    <!-- View Customer List -->
     <div class="container my-5">
         <h2> List of Customers </h2> <br />
         <a class="btn btn-outline-success" href="/ERP/ERP_SYSTEM/php/cusReg.php" role="button" style="font-weight: bold;"> + Add New Customer </a> <br />
@@ -42,7 +42,7 @@ include('conn.php');
 
                 <?php
 
-                //read all records from customer table
+                // Read all records from the customer table
                 $sql = "SELECT * FROM customer";
                 $result = mysqli_query($conn, $sql);
 
@@ -50,7 +50,7 @@ include('conn.php');
                     die("Invalid query: " . mysqli_error($conn));
                 }
 
-                //output data of each row
+                // Output data of each row
                 while ($row = mysqli_fetch_assoc($result)) {
                     echo "
                     <tr>
@@ -65,15 +65,14 @@ include('conn.php');
                         <a class='btn btn-primary btn-sm' href='cusUpdate.php?updateid=$row[id]' role='button'> Edit </a>
                         <a class='btn btn-danger btn-sm' href='cusDelete.php?deleteid=$row[id]' role='button'> Delete </a>
                     </td>
-                    ";
+                    </tr>";
                 }
                 ?>
             </tbody>
-
         </table>
     </div>
 </body>
-
+<!-- Footer -->
 <?php include("footer.php") ?>
 
 </html>
