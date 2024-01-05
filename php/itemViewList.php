@@ -1,5 +1,5 @@
 <?php
-include('conn.php');
+include('conn.php'); // Include database connection
 ?>
 
 <!DOCTYPE html>
@@ -18,7 +18,9 @@ include('conn.php');
 </head>
 
 <body>
+    <!-- Navbar -->
     <?php include("navbar.php") ?>
+    <!-- View Item List -->
     <div class="container my-5">
         <h2> List of Items </h2> <br />
         <a class="btn btn-outline-success" href="/ERP/ERP_SYSTEM/php/itemAdd.php" role="button" style="font-weight: bold;"> + Add New Item </a> <br />
@@ -40,7 +42,7 @@ include('conn.php');
 
                 <?php
 
-                //read all records from item table
+                // Read all records from the item table
                 $sql = "SELECT * FROM item";
                 $result = mysqli_query($conn, $sql);
 
@@ -48,7 +50,7 @@ include('conn.php');
                     die("Invalid query: " . mysqli_error($conn));
                 }
 
-                //output data of each row
+                // Output data of each row
                 while ($row = mysqli_fetch_assoc($result)) {
                     echo "
                     <tr>
@@ -73,7 +75,7 @@ include('conn.php');
     </div>
 
 </body>
-
+<!-- Footer -->
 <?php include("footer.php") ?>
 
 </html>

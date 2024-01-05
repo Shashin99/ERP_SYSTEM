@@ -1,11 +1,12 @@
 <?php
-include('conn.php');
+include('conn.php'); // Include database connection
 
-
-$sql = "SELECT category from item_category";
+// Retrieve item categories from the database
+$sql = "SELECT category FROM item_category";
 $result = mysqli_query($conn, $sql);
 $categories = array();
 
+// Check if the query was successful and fetch category data
 if ($result) {
     while ($row = mysqli_fetch_assoc($result)) {
         $categories[] = $row;
@@ -14,10 +15,12 @@ if ($result) {
     die("Invalid query: " . mysqli_error($conn));
 }
 
+// Retrieve item subcategories from the database
 $sql = "SELECT sub_category FROM item_subcategory";
 $result = mysqli_query($conn, $sql);
 $sub_categories = array();
 
+// Check if the query was successful and fetch subcategory data
 if ($result) {
     while ($row = mysqli_fetch_assoc($result)) {
         $sub_categories[] = $row;
@@ -26,6 +29,7 @@ if ($result) {
     die("Invalid query: " . mysqli_error($conn));
 }
 
+// Handle form submission to add a new item
 if (isset($_POST['submit'])) {
     $itemcode = $_POST['itemcode'];
     $itemname = $_POST['itemname'];
@@ -34,17 +38,20 @@ if (isset($_POST['submit'])) {
     $qty = $_POST['qty'];
     $price = $_POST['price'];
 
+    // SQL query to insert new item into the database
     $sql = "INSERT INTO item (item_code, item_category, item_subcategory, item_name, quantity, unit_price)
     VALUES ('$itemcode', '$category', '$subcategory', '$itemname', '$qty', '$price')";
 
+    // Execute the SQL query
     if (mysqli_query($conn, $sql)) {
-        header("Location: itemViewList.php");
+        header("Location: itemViewList.php"); // Redirect to the item view list page on success
     } else {
-        echo "Error: " . $sql . "<br>" . mysqli_error($conn);
+        echo "Error: " . $sql . "<br>" . mysqli_error($conn); // Display error message on failure
     }
 }
 
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -90,6 +97,9 @@ if (isset($_POST['submit'])) {
     </style>
 
 <body>
+    <!-- Navbar -->
+    <?php include("navbar.php") ?>
+    <!-- Add New Item -->
     <div class="container my-5">
         <h2 class="text-center"> Add New Item </h2>
         <div class="fluid-container">

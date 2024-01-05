@@ -190,8 +190,4 @@ if (isset($_POST['submit'])) {
     </script>
 
 </body>
-
-<!-- Footer -->
-<?php include("footer.php") ?>
-
 </html>
