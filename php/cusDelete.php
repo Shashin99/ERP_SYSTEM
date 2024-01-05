@@ -8,7 +8,7 @@ if (isset($_GET['deleteid'])) {
     if (mysqli_query($conn, $sql)) {
         echo '<script>';
         echo 'alert("Customer deleted successfully");';
-        echo 'window.location.href = "CusViewList.php";';
+        echo 'window.location.href = "cusViewList.php";';
         echo '</script>';
         exit;
     } else {
