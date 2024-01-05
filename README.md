@@ -25,3 +25,6 @@ How to Use:
 3. View lists of customers and items.
 4. Generate invoice reports and item reports based on specified date ranges.
 5. Explore the provided reports with detailed information.
+
+Video Link:
+https://www.loom.com/share/94691ccc61be41b7934b1aa7272e3018?sid=86e52769-86ac-42f6-a6ef-f82c94ce7c94
