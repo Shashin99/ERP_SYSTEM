@@ -1,11 +1,12 @@
 <?php
-include('conn.php');
+include('conn.php'); // Include database connection
 
 if (isset($_POST['search'])) {
     $date = $_POST['date'];
 
-    $sql = "SELECT * FROM invoice WHERE  date = '$date'";
-    $result = mysqli_query($conn, $sql);
+    // SQL query to retrieve invoice details based on date
+    $sql = "SELECT * FROM invoice WHERE date = '$date'";
+    $result = mysqli_query($conn, $sql); // Execute the SQL query
 }
 
 ?>
@@ -23,12 +24,12 @@ if (isset($_POST['search'])) {
 
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-
 </head>
 
 <body>
+    <!-- Navbar -->
     <?php include("navbar.php") ?>
-
+    <!-- Invoice Report -->
     <div class="container my-5">
         <h2> Invoice Report </h2> <br />
         <table class="table">
@@ -43,6 +44,7 @@ if (isset($_POST['search'])) {
             </thead>
             <tbody>
                 <?php
+                // Display retrieved invoice details in a table
                 while ($row = mysqli_fetch_assoc($result)) {
                     echo "<tr>";
                     echo "<td>" . $row['invoice_no'] . "</td>";
@@ -53,11 +55,11 @@ if (isset($_POST['search'])) {
                     echo "</tr>";
                 }
                 ?>
-
             </tbody>
-
         </table>
     </div>
 </body>
+<!-- Footer -->
+<?php include("footer.php") ?>
 
 </html>

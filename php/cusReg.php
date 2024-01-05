@@ -1,9 +1,12 @@
 <?php
-include('conn.php');
+include('conn.php'); // Include database connection
 
+// Fetch districts from the database
 $sql = "SELECT district FROM district";
 $result = mysqli_query($conn, $sql);
 $district = array();
+
+// Populate the district array with data from the query result
 if ($result) {
     while ($row = mysqli_fetch_assoc($result)) {
         $district[] = $row;
@@ -12,7 +15,9 @@ if ($result) {
     die("Invalid query: " . mysqli_error($conn));
 }
 
+// Check if the registration form is submitted
 if (isset($_POST['submit'])) {
+    // Retrieve form data
     $title = $_POST['title'];
     $firstname = $_POST['firstname'];
     $middlename = $_POST['middlename'];
@@ -20,17 +25,18 @@ if (isset($_POST['submit'])) {
     $contactno = $_POST['contactno'];
     $district = $_POST['district'];
 
+    // Insert customer data into the database
     $sql = "INSERT INTO customer (title, first_name, middle_name, last_name, contact_no, district) 
-VALUES ('$title', '$firstname', '$middlename', '$lastname', '$contactno', '$district')";
+            VALUES ('$title', '$firstname', '$middlename', '$lastname', '$contactno', '$district')";
 
+    // Execute the SQL query
     if (mysqli_query($conn, $sql)) {
-        header("Location: cusViewList.php");
+        header("Location: cusViewList.php"); // Redirect on successful registration
     } else {
-        echo "Error: " . $sql . "<br>" . mysqli_error($conn);
+        echo "Error: " . $sql . "<br>" . mysqli_error($conn); // Display error message
     }
 }
 ?>
-
 
 <!DOCTYPE html>
 <html lang="en">
@@ -79,6 +85,10 @@ VALUES ('$title', '$firstname', '$middlename', '$lastname', '$contactno', '$dist
 </head>
 
 <body>
+    <!-- Navbar -->
+    <?php include("navbar.php") ?>
+
+    <!-- Customer Registration Form -->
     <div class="container my-5">
         <h2 class="text-center"> Customer Registration </h2>
         <div class="fluid-container">
@@ -148,11 +158,10 @@ VALUES ('$title', '$firstname', '$middlename', '$lastname', '$contactno', '$dist
 
             </form>
         </div>
-
-
     </div>
 
     <script>
+        // Form validation
         function validateForm() {
             var title = document.getElementById('title').value;
             var firstname = document.getElementById('firstname').value;
@@ -181,5 +190,4 @@ VALUES ('$title', '$firstname', '$middlename', '$lastname', '$contactno', '$dist
     </script>
 
 </body>
-
 </html>

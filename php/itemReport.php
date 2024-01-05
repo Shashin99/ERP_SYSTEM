@@ -1,13 +1,12 @@
 <?php
-include('conn.php');
+include('conn.php'); // Include database connection
 
 $sql = "SELECT item_name, item_category, item_subcategory, quantity
         FROM item
-        GROUP BY item_name";
+        GROUP BY item_name"; // SQL query to retrieve item details grouped by item name
 
-$result = mysqli_query($conn, $sql);
+$result = mysqli_query($conn, $sql); // Execute the SQL query
 ?>
-
 
 <!DOCTYPE html>
 <html lang="en">
@@ -26,18 +25,18 @@ $result = mysqli_query($conn, $sql);
 </head>
 
 <body>
+    <!-- Navbar -->
     <?php include("navbar.php") ?>
-
+    <!-- Item Report -->
     <div class="container my-5">
-        <h2> Invoice Report </h2> <br />
+        <h2> Item Report </h2> <br />
         <table class="table">
             <thead>
                 <tr>
                     <th> Item Name</th>
                     <th> Item Category </th>
-                    <th> Item SubCategory </th>
+                    <th> Item Subcategory </th>
                     <th> Quantity </th>
-
                 </tr>
             </thead>
             <tbody>
@@ -51,11 +50,11 @@ $result = mysqli_query($conn, $sql);
                     echo "</tr>";
                 }
                 ?>
-
             </tbody>
-
         </table>
     </div>
 </body>
+<!-- Footer -->
+<?php include("footer.php") ?>
 
 </html>

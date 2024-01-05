@@ -103,6 +103,9 @@ if (isset($_POST['submit'])) {
 </head>
 
 <body>
+    <!-- Navbar -->
+    <?php include("navbar.php") ?>
+    <!-- Update Item -->
     <div class="container my-5">
         <h2 class="text-center mb-3"> Update Item Information </h2>
         <div class="fluid-container">
@@ -179,6 +182,7 @@ if (isset($_POST['submit'])) {
     </div>
 
     <script>
+        //validate form
         function validateForm() {
             var itemcode = document.getElementById('itemcode').value;
             var itemname = document.getElementById('itemname').value;

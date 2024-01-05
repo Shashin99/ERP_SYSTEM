@@ -44,6 +44,7 @@
 </head>
 
 <body>
+    <!-- navbar -->
     <?php include("navbar.php") ?>
     <!-- Invoice Report-->
     <div class="container">
@@ -96,6 +97,7 @@
     </div>
 
     <script>
+        // Validate date
         function validateForm(date) {
             var dateValue = document.getElementById(date).value;
 
@@ -109,7 +111,7 @@
     </script>
 
 </body>
-
+<!--Footer-->
 <?php include("footer.php") ?>
 
 </html>
